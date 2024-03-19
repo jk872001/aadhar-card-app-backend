@@ -1,0 +1,5 @@
+docker build 
+docker ps
+docker stop container name
+docker run --rm --name youtube-backend-container -d -p 4002:4002 -v C:\jitesh\backend-journey\chai-and-deploy:/app youtube-backend-img
+-d --> detach mode means will run in background
