@@ -1,45 +1,35 @@
 import { Router } from "express";
 import {
   changeCurrentPassword,
+  deleteUser,
   getAllUsers,
   getCurrentUser,
+  getUserById,
   getUserChannelProfile,
   getWatchHistory,
   loginUser,
   logoutUser,
   refreshAccessToken,
   registerUser,
-  updateAccountDetails,
   updateUserAvatar,
   updateUserCoverImage,
+  userUpdate,
 } from "../controllers/user.controller.js";
 import { upload } from "../middlewares.js/multer.middleware.js";
 import { verifyJWT } from "../middlewares.js/auth.mddleware.js";
 
 const userRouter = Router();
 
-userRouter.post(
-  "/registerUser",
-  // upload.fields([
-  //   {
-  //     name: "avatar",
-  //     maxfile: 1,
-  //   },
-  //   {
-  //     name: "coverImage",
-  //     maxfile: 1,
-  //   },
-  // ]),
-
-  registerUser
-);
+userRouter.post("/registerUser", verifyJWT, registerUser);
 userRouter.post("/loginUser", loginUser);
-userRouter.get("/getAllUsers", getAllUsers);
+userRouter.get("/getAllUsers", verifyJWT, getAllUsers);
+userRouter.get("/getUserById/:userId", verifyJWT, getUserById);
+userRouter.delete("/deleteUser", verifyJWT, deleteUser);
 userRouter.post("/logoutUser", verifyJWT, logoutUser);
 userRouter.post("/refresh-token", refreshAccessToken);
 userRouter.post("/change-password", verifyJWT, changeCurrentPassword);
 userRouter.get("/get-current-user", verifyJWT, getCurrentUser);
-userRouter.post("/update-account-details", verifyJWT, updateAccountDetails);
+userRouter.put("/userUpdate/:userId", verifyJWT, userUpdate);
 userRouter.post(
   "/update-user-avatar",
   upload.single("avatar"),

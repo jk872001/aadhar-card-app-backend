@@ -61,7 +61,8 @@ const aadharCardUpload = asyncHandler(async (req, res) => {
       new ApiResponse(200, aadharCardFind, "Aadhar card uploaded successfully")
     );
 });
-const getAllAadharCard=async(req,res)=>{
+
+const getAllAadharCard=asyncHandler(async(req,res)=>{
       const {userId}=req.params
 
       const user = await User.findOne({_id:userId})
@@ -83,6 +84,17 @@ const getAllAadharCard=async(req,res)=>{
         "All aadhar cards fetched successfully"
       )
     );
-}
+})
 
-export { aadharCardUpload,getAllAadharCard };
+const deleteAadhar=asyncHandler(async (req,res)=>{
+  const aadharId = req.body.aadharId
+  
+  await AadharCard.deleteOne({_id: aadharId })
+  
+  return res
+    .status(200)
+    .json(new ApiResponse(200, null, "Aadhar deleted successfully"));
+})
+
+
+export { aadharCardUpload,getAllAadharCard,deleteAadhar };
