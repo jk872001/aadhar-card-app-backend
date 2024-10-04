@@ -18,9 +18,15 @@ app.use(cookieParser())
 
 import {userRouter}  from "./routes/user.route.js"
 import { aadharCardRouter } from "./routes/aadharCard.route.js";
+import { data } from "./constants/cookie.js";
+import { productRouter } from "./routes/product.route.js";
 
-app.use("/api/v1/users",userRouter)
-app.use("/api/v1/aadhar",aadharCardRouter)
+// app.use("/api/v1/users",userRouter)
+// app.use("/api/v1/aadhar",aadharCardRouter)
+app.use("/api/v1/",productRouter)
+app.get("/getAllTests",(req,res)=>{
+    res.send(data)
+})
 
 app.get("/",(req,res)=>{
     res.json({msg:"hi working well"})

@@ -24,7 +24,7 @@ userRouter.post("/registerUser", verifyJWT, registerUser);
 userRouter.post("/loginUser", loginUser);
 userRouter.get("/getAllUsers", verifyJWT, getAllUsers);
 userRouter.get("/getUserById/:userId", verifyJWT, getUserById);
-userRouter.delete("/deleteUser", verifyJWT, deleteUser);
+userRouter.post("/deleteUser", verifyJWT, deleteUser);
 userRouter.post("/logoutUser", verifyJWT, logoutUser);
 userRouter.post("/refresh-token", refreshAccessToken);
 userRouter.post("/change-password", verifyJWT, changeCurrentPassword);
